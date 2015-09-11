@@ -1,7 +1,7 @@
 var schedule;
 
 // Load the JSON file
-loadJSON('http://localhost:8888/hours-patch/',
+loadJSON('http://gvsuliblabs.com//hours-patch/',
 	function(data) { schedule = data; },
 	function(xhr) { console.error(xhr); }
 );
