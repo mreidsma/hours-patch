@@ -40,14 +40,14 @@ for (var key in schedule) {
 	  	}
 }
 
-function padMinutes(minutes) {
-	return parseInt(minutes) >= 10 ? minutes : "0" + minutes;
+function padTime(time) {
+	return parseInt(time) >= 10 ? time : "0" + time;
 }
 
 function getHoursMin(time) {
 	var b = new Date(time);
 	var h = b.getHours();
-	var formattedTime = h + ':' + padMinutes(b.getMinutes());
+	var formattedTime = h + ':' + padTime(b.getMinutes());
 	return formattedTime;
 }
 
@@ -73,11 +73,7 @@ function convertTimeFormat(time) {
     var AMPM = time.match(/\s(.*)$/)[1];
     if (AMPM == "PM" && hours < 12) hours = hours + 12;
     if (AMPM == "AM" && hours == 12) hours = hours - 12;
-    var sHours = hours.toString();
-    var sMinutes = minutes.toString();
-    if (hours < 10) sHours = "0" + sHours;
-    if (minutes < 10) sMinutes = "0" + sMinutes;
-    return(sHours + ":" + sMinutes);
+    return(padTime(hours) + ":" + padTime(minutes));
 }
 
 function loadJSON(path, success, error)
