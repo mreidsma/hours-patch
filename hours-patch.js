@@ -40,11 +40,14 @@ for (var key in schedule) {
 	  	}
 }
 
+function padMinutes(minutes) {
+	return parseInt(minutes) >= 10 ? minutes : "0" + minutes;
+}
+
 function getHoursMin(time) {
 	var b = new Date(time);
 	var h = b.getHours();
-	var m = "0" + b.getMinutes();
-	var formattedTime = h + ':' + m.substr(-2);
+	var formattedTime = h + ':' + padMinutes(b.getMinutes());
 	return formattedTime;
 }
 
