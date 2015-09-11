@@ -9,7 +9,7 @@ loadJSON('http://localhost:8888/hours-patch/',
 // What is it right now?
 var todayNow = getCurrentTime();
 var todayDay = getDayName(todayNow);
-
+var nowHoursMin = getHoursMin(todayNow);
 
 for (var key in schedule) {
 	  	if (schedule.hasOwnProperty(key)) {
@@ -21,9 +21,11 @@ for (var key in schedule) {
 	  				var scheduleTimes = schedule[key].split(' - ');
 	  				var openingTime = convertTimeFormat(scheduleTimes[0]);
 	  				var closingTime = convertTimeFormat(scheduleTimes[1]);
-					// Is the closing time past midnight?
+					// Is the closing time past midnight? Is it before closing?
 					// This is when we want to make the change.
-					if(closingTime < openingTime) {
+
+
+					if((closingTime < openingTime) && (closingTime > nowHoursMin)) {
 						// Format closing time
 						closingTime = closingTime.replace(/\b0+/g, '');
 						close = closingTime.split(':');
@@ -36,6 +38,14 @@ for (var key in schedule) {
 	  			
 	  		}
 	  	}
+}
+
+function getHoursMin(time) {
+	var b = new Date(time);
+	var h = b.getHours();
+	var m = "0" + b.getMinutes();
+	var formattedTime = h + ':' + m.substr(-2);
+	return formattedTime;
 }
 
 function getCurrentTime() {
